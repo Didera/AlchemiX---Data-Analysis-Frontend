@@ -1,10 +1,9 @@
-name: Deploy AlchemiX Frontend
+name: Deploy Analytics Frontend
 
 on:
   push:
     branches:
       - main
-
   workflow_dispatch:
 
 permissions:
@@ -24,40 +23,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
 
-      - name: Install frontend dependencies
-        working-directory: frontend
+      - name: Install dependencies
         run: npm ci
 
       - name: Build frontend
-        working-directory: frontend
         run: npm run build
-        env:
-          VITE_DEMO_MODE: "true"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload frontend build
+      - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/dist
+          path: dist
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
