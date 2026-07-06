@@ -1,0 +1,17 @@
+ALCHEMIX CLEAN INSTALL (Windows PowerShell)
+
+1. Confirm Node.js:
+   node -v
+   npm -v
+
+   Required by Vite 8: Node.js 20.19+ or 22.12+
+
+2. Confirm the public npm registry:
+   npm config set registry https://registry.npmjs.org/
+   npm config get registry
+
+3. Install and run:
+   npm install
+   npm run dev
+
+If this folder was copied over an older project folder, delete any old node_modules and package-lock.json first.
