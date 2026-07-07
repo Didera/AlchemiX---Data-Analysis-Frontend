@@ -760,8 +760,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <div className="ambient ambient--one" />
-      <div className="ambient ambient--two" />
 
       <header className="app-header">
         <div className="brand-block">
